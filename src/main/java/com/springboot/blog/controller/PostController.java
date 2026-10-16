@@ -43,6 +43,14 @@ public class PostController {
     }
 
     // get all blog posts rest api
+    @Operation(
+            summary = "Get Post REST API",
+            description = "Get Post REST API is used to get posts from database"
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "Http Status 200 SUCCESS"
+    )
     @GetMapping
     public PostResponse getAllPosts(
             @RequestParam(value = "pageNo",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER ,required = false) int  pageNo,
@@ -54,13 +62,30 @@ public class PostController {
     }
 
     // get blog post by Id
+    @Operation(
+            summary = "Get Post REST API",
+            description = "Get Post REST API is used to get post from database"
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "Http Status 200 SUCCESS"
+    )
     @GetMapping("/{id}")
     public ResponseEntity<PostDto> getPostById(@PathVariable Long id){
         return ResponseEntity.ok(postService.getPostById(id));
     }
 
-    @SecurityRequirement(name = "Bearer Authentication")
+
     // update blog post by Id
+    @SecurityRequirement(name = "Bearer Authentication")
+    @Operation(
+            summary = "Update Post REST API",
+            description = "Update Post REST API is used to Update post in database"
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "Http Status 200 SUCCESS"
+    )
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<PostDto> updatePost(@Valid @RequestBody PostDto postDto, @PathVariable Long id){
@@ -68,8 +93,16 @@ public class PostController {
     }
 
 
-    @SecurityRequirement(name = "Bearer Authentication")
     // delete blog post by ID
+    @SecurityRequirement(name = "Bearer Authentication")
+    @Operation(
+            summary = "Delete Post REST API",
+            description = "Delete Post REST API is used to Delete post from database"
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "Http Status 200 SUCCESS"
+    )
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> deletePost(@PathVariable Long id){
