@@ -1,211 +1,125 @@
-# Blog API
+# Spring Boot RESTful Blog API
 
-A RESTful Blog API built with Java and Spring Boot for managing users, blog posts, and comments.
+A secure, scalable, and robust RESTful Blog API built with **Java** and **Spring Boot** for blog posts, categories, and comments. Designed following enterprise standards and clean architecture principles.
 
-##  Technologies
+## 🚀 Technologies & Tech Stack
 
-- Java
-- Spring Boot
-- Spring Data JPA
-- Hibernate
-- MySQL
-- Lombok
-- Swagger / OpenAPI
-- Maven
+```text
+- Core & Language: Java 23, Object-Oriented Programming (OOP)
+- Framework: Spring Boot, Spring MVC
+- Security: Spring Security, JSON Web Tokens (JWT) for stateless authentication & authorization
+- Data Persistence: Spring Data JPA, Hibernate ORM
+- Database: MySQL
+- Utilities & Validation: Lombok, Jakarta Bean Validation
+- Documentation: Springdoc OpenAPI (Swagger)
+- Build Tool: Maven
+```
 
-##  Features
+## ✨ Features
 
-- User management
-- Create, update, retrieve, and delete blog posts
-- Add, update, retrieve, and delete comments
-- Pagination and sorting
-- DTO-based request and response handling
-- Input validation
-- Global exception handling
-- JPA entity relationships
-- RESTful API architecture
-- API documentation with Swagger / OpenAPI
+```text
+- User Management & Auth: Secure user registration, login, and authentication using Spring Security and JWT.
+- Blog Posts Management: Complete CRUD operations for blog posts with support for Pagination and Sorting.
+- Categories & Comments: Manage categories and add/update/delete comments associated with posts using JPA entity relationships (One-to-Many / Many-to-One).
+- Architecture & Design: Clean Layered Architecture, DTO Pattern for request/response decoupling, and Dependency Injection.
+- Validation & Exception Handling: Robust input validation and centralized Global Exception Handling.
+- API Documentation: Interactive API testing and documentation via Swagger / OpenAPI.
 
-##  Architecture
+```
 
-The project follows a layered architecture to keep the code organized, maintainable, and easy to extend.
+## 🏗️ Architecture
 
+The project follows a modular layered architecture to ensure separation of concerns, maintainability, and scalability.
+
+```text
     Controller
         ↓
-    Service
+     Service
         ↓
-    Repository
+   Repository
         ↓
     Database
 
-### Layers
+```
 
-- **Controller** — Handles HTTP requests and API responses.
-- **Service** — Contains the application's business logic.
-- **Repository** — Handles database operations using Spring Data JPA.
-- **Entity** — Represents database entities and their relationships.
-- **Payload** — Handles data transfer between the API and clients.
-- **Exception** — Provides centralized exception handling.
-- **Security** - Provide authentication services for users.
+### Layers Breakdown
+
+```text
+- Controller — Exposes REST endpoints, handles HTTP requests, and returns JSON responses.
+- Service — Contains the core business logic and transactional boundaries.
+- Repository — Handles database interaction and data querying using Spring Data JPA.
+- Entity — Defines database tables and their relational mappings.
+- Payload (DTO) — Encapsulates data transfer between clients and the API.
+- Exception — Manages centralized error handling across the application.
+- Security — Implements authentication, JWT filters, and role-based access control.
+- Config — Holds application configurations (Swagger, Security beans, etc.).
+
+```
 
 ## 📂 Project Structure
 
-    src
-    └── main
-        └── java
-            └── com.example.blog
-                ├── controller
-                ├── service
-                ├── repository
-                ├── entity
-                ├── payload
-                ├── exception
-                ├── security
-                └── config
+```text
+src
+└── main
+    └── java
+        └── com.example.blog
+            ├── controller
+            ├── service
+            ├── repository
+            ├── entity
+            ├── payload
+            ├── exception
+            ├── security
+            └── config
 
-##  Database
+```
 
-The application uses **MySQL** as the relational database and **Hibernate** as the JPA implementation.
+## 🗄️ Database & Entities
 
-### Main Entities
+The application uses MySQL as the relational database managed through Hibernate ORM.
 
-- User
-- Post
-- Comment
+```text
+Main Entities:
+- User: Handles authentication, roles, and user details.
+- Post: Blog post content, title, and relations.
+- Category: Categorization for blog posts.
+- Comment: User comments linked to specific posts.
 
-The entities are mapped using JPA relationships and managed through Spring Data JPA repositories.
+```
 
-## 🔗 API Endpoints
+## 🌐 API Endpoints
 
-### Users
+### 🔐 Auth (User) Endpoints
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/users` | Get all users |
-| GET | `/api/users/{id}` | Get user by ID |
-| POST | `/api/auth/register` | Create a new user |
-| PUT | `/api/users/{id}` | Update a user |
-| DELETE | `/api/users/{id}` | Delete a user |
+```text
+- POST   /api/auth/signup   - Register a new user
+- POST   /api/auth/register - Register a new user (Alias)
+- POST   /api/auth/signin   - Authenticate user & generate JWT
+- POST   /api/auth/login    - Authenticate user & generate JWT (Alias)
 
-### Posts
+```
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/posts` | Get all posts |
-| GET | `/api/posts/{id}` | Get post by ID |
-| POST | `/api/posts` | Create a new post |
-| PUT | `/api/posts/{id}` | Update a post |
-| DELETE | `/api/posts/{id}` | Delete a post |
+### 🗂️ Category Endpoints
 
-### Comments
+```text
+- POST   /api/v1/categories       - Create a new category
+- GET    /api/v1/categories       - Retrieve all categories
+- GET    /api/v1/categories/{id}  - Retrieve a specific category by ID
+- PUT    /api/v1/categories/{id}  - Update an existing category
+- DELETE /api/v1/categories/{id}  - Delete a category
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/posts/{postId}/comments/{commentId}` | Get comment by ID |
-| GET | `/api/posts/{postId}/comments` | Get comments for a post |
-| POST | `/api/posts/{postId}/comments` | Add a comment |
-| PUT | `/api/posts/{postId}/comments/{commentId}` | Update a comment |
-| DELETE | `/api/posts/{postId}/comments/{commentId}` | Delete a comment |
+```
+## 📖 API Documentation (Swagger)
 
-##  API Documentation
+Once the application is running, you can explore and test all endpoints interactively through Swagger UI:
 
-The API is documented using **Swagger / OpenAPI**, providing an interactive interface for exploring and testing the available endpoints.
+👉 **[http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)**
 
-After running the application, open:
+## 💡 Key Engineering Concepts Demonstrated
 
-    http://localhost:8080/swagger-ui/index.html
-
-## ⚙️ Getting Started
-
-### Prerequisites
-
-Make sure you have the following installed:
-
-- Java 17 or higher
-- Maven
-- MySQL
-
-### 1. Clone the Repository
-
-    git clone https://github.com/your-username/blog-api.git
-
-### 2. Navigate to the Project
-
-    cd blog-api
-
-### 3. Create the Database
-
-Create a MySQL database:
-
-    CREATE DATABASE blog_db;
-
-### 4. Configure Database Connection
-
-Update the database configuration in:
-
-    src/main/resources/application.properties
-
-Example configuration:
-
-    spring.datasource.url=jdbc:mysql://localhost:3306/blog_db
-    spring.datasource.username=your_username
-    spring.datasource.password=your_password
-
-    spring.jpa.hibernate.ddl-auto=update
-    spring.jpa.show-sql=true
-
-### 5. Run the Application
-
-Using Maven:
-
-    mvn spring-boot:run
-
-Or run the application directly from your IDE.
-
-The API will be available at:
-
-    http://localhost:8080
-
-##  Example Request
-
-### Create a Post
-
-    POST /api/posts
-    Content-Type: application/json
-
-Request body:
-
-    {
-        "title": "Introduction to Spring Boot",
-        "content": "Spring Boot makes it easy to build production-ready Java applications."
-    }
-
-##  Key Concepts
-
-This project demonstrates practical usage of:
-
-- Object-Oriented Programming
-- RESTful API Design
-- Layered Architecture
-- Dependency Injection
-- Spring Boot
-- Spring Data JPA
-- Hibernate ORM
-- Entity Relationships
-- DTO Pattern
-- Exception Handling
-- Input Validation
-- Pagination
-- Sorting
-- Database Integration
-- API Documentation
-
-##  Future Improvements
-
-- Spring Security
-- JWT Authentication
-- Role-Based Authorization
-- Unit Testing
-- Integration Testing
-- Docker Containerization
-- CI/CD Pipeline
+```text
+- RESTful API Best Practices & Versioning
+- Stateless Authentication with JWT & Spring Security
+- Object-Relational Mapping (ORM) & Complex Database Relationships
+- Clean Code, SOLID Principles, and DTO Pattern
+- Centralized Exception Handling & Input Validation
